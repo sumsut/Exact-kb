@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Fit your photo or signature to your form’s exact KB limit. Free, and nothing is uploaded.">
+<meta name="theme-color" content="#FFF9FA">
+<title>Exact KB – Photo &amp; Signature</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✍️</text></svg>">
+<style>
+:root{--bg:#FFF9FA;--card:#fff;--ink:#2a1c22;--mute:#7b6670;--line:#ecd9df;--acc:#d6336c;--acc2:#fff;--soft:#fde8ef;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#171014;--card:#221820;--ink:#f6e9ee;--mute:#b79aa6;--line:#3a2a33;--acc:#ff6b9a;--acc2:#2a0f1a;--soft:#33202a;color-scheme:dark}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:640px;margin:0 auto;padding:20px 16px 48px}
+h1{font-size:2rem;margin:.4em 0 .1em;letter-spacing:-.02em}h1 span{color:var(--acc)}
+h2{font-size:1.25rem;margin:.2em 0}.mute{color:var(--mute)}
+.cards{display:grid;gap:14px;margin-top:22px}
+.card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:20px;transition:.15s}
+.card:hover{border-color:var(--acc);transform:translateY(-2px)}
+.card .ic{font-size:2.2rem}.card b{display:block;font-size:1.2rem;margin-top:4px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.tags i{font-style:normal;font-size:.78rem;background:var(--soft);padding:3px 9px;border-radius:99px}
+.step{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:16px;margin:14px 0}
+.step h3{margin:0 0 10px;font-size:1rem}.step h3 b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--acc);color:var(--acc2);font-size:.85rem;margin-right:6px}
+.drop{display:block;border:2px dashed var(--line);border-radius:14px;padding:22px;text-align:center;cursor:pointer}.drop:hover{border-color:var(--acc)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:7px 14px;font:inherit;font-size:.92rem;cursor:pointer}
+.chip.on{background:var(--acc);border-color:var(--acc);color:var(--acc2)}
+.row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}.row label{flex:1;min-width:130px;font-size:.85rem;color:var(--mute)}
+input[type=number]{width:100%;padding:9px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.btn{width:100%;padding:14px;border:0;border-radius:14px;background:var(--acc);color:var(--acc2);font:inherit;font-weight:700;font-size:1.05rem;cursor:pointer;margin-top:6px}
+.btn:disabled{opacity:.4}.btn.alt{background:var(--soft);color:var(--ink)}
+.pv{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.pv figure{margin:0}.pv img,.pv canvas{width:100%;max-height:220px;object-fit:contain;border:1px solid var(--line);border-radius:10px;background:#fff}
+.pv figcaption{font-size:.78rem;color:var(--mute);text-align:center;margin-top:3px}
+#msg{margin:10px 0 0;font-size:.92rem}.ok{color:#1c8a4a}.bad{color:#d33}
+a.back{color:var(--acc);text-decoration:none;font-weight:600}
+footer{margin-top:30px;font-size:.8rem;text-align:center}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<h1>Exact <span>KB</span></h1>
+<p class="mute">Make your photo or signature fit any form’s size limit. Free. Nothing is uploaded — it all happens on your device.</p>
+
+<section id="home">
+  <div class="cards">
+    <a class="card" href="#photo"><div class="ic">📷</div><b>Photo <small class="mute">फ़ोटो</small></b><span class="mute">Shrink a passport photo to your exact KB range.</span><div class="tags"><i>IBPS</i><i>SSC</i><i>UPSC</i><i>JEE</i></div></a>
+    <a class="card" href="#signature"><div class="ic">✍️</div><b>Signature <small class="mute">हस्ताक्षर</small></b><span class="mute">White background, real dark gel-ink look, smooth &amp; sharp even at 10–50 KB.</span><div class="tags"><i>Background → white</i><i>Gel ink</i><i>Sharpened</i></div></a>
+  </div>
+</section>
+
+<section id="tool" hidden>
+  <a class="back" href="#">← Back</a>
+  <h2 id="ttl"></h2>
+
+  <div class="step"><h3><b>1</b> File <span class="mute">फ़ाइल</span></h3>
+    <label class="drop"><input type="file" id="f" accept="image/*" hidden><span id="dt">Tap to choose an image</span></label>
+    <div id="sigopt" hidden>
+      <div class="row" style="margin-top:14px"><div style="flex:1"><div class="mute" style="font-size:.85rem;margin-bottom:6px">Ink colour</div>
+        <div class="chips" id="inks"></div></div></div>
+      <div class="row"><label>Ink strength<input type="range" id="str" min="-10" max="10" value="0"></label></div>
+    </div>
+    <div class="pv" id="pv" hidden><figure><img id="o" alt=""><figcaption>Original</figcaption></figure><figure><canvas id="p"></canvas><figcaption id="pc">Preview</figcaption></figure></div>
+  </div>
+
+  <div class="step"><h3><b>2</b> Your form’s limit, in KB <span class="mute">सीमा</span></h3>
+    <div class="chips" id="lims"></div>
+    <div class="row"><label>Other limit (KB)<input type="number" id="cmax" min="1" placeholder="e.g. 75"></label><label>Minimum, if any (KB)<input type="number" id="cmin" min="0" placeholder="e.g. 20"></label></div>
+    <div class="mute" style="font-size:.85rem;margin:14px 0 6px">Exam shortcuts</div><div class="chips" id="ex"></div>
+    <p class="mute" style="font-size:.8rem;margin:10px 0 0">Limits change with each notice. Check yours before you upload.</p>
+  </div>
+
+  <button class="btn" id="go" disabled>Make it exact</button>
+  <p id="msg"></p>
+  <div id="res" hidden>
+    <div class="pv" style="grid-template-columns:1fr"><figure><img id="ri" alt=""></figure></div>
+    <a class="btn" id="dl" style="display:block;text-align:center;text-decoration:none">Download</a>
+  </div>
+</section>
+<footer class="mute">Free, and works without an account.</footer>
+</main>
+
+<script>
+const $=s=>document.querySelector(s);
+const PRE={photo:[["IBPS photo",20,50],["SSC photo",20,50],["UPSC photo",20,200],["JEE Main photo",10,200]],
+ signature:[["IBPS signature",10,20],["SSC signature",10,20],["UPSC signature",20,100],["JEE Main signature",10,100]]};
+const INKS=[["Blue gel",[10,24,110],[48,72,170]],["Black gel",[8,8,12],[60,60,70]],["Navy",[6,12,64],[40,52,130]]];
+let mode,src,prep,sigC,ink=0,MAX=50,MIN=0,url;
+
+function chips(el,items,fn){el.innerHTML="";items.forEach((t,i)=>{const b=document.createElement("button");b.className="chip";b.textContent=t;b.onclick=()=>{[...el.children].forEach(c=>c.classList.remove("on"));b.classList.add("on");fn(i)};el.appendChild(b)})}
+chips($("#lims"),["10","20","50","100","200","500","1 MB"],i=>{MAX=[10,20,50,100,200,500,1024][i];MIN=0;$("#cmax").value="";$("#cmin").value="";clearEx()});
+function clearEx(){[...$("#ex").children].forEach(c=>c.classList.remove("on"))}
+$("#cmax").oninput=()=>{MAX=+$("#cmax").value||0;[...$("#lims").children].forEach(c=>c.classList.remove("on"));clearEx()};
+$("#cmin").oninput=()=>{MIN=+$("#cmin").value||0};
+chips($("#inks"),INKS.map(i=>i[0]),i=>{ink=i;sigRender()});$("#inks").children[0].classList.add("on");
+$("#str").oninput=()=>{clearTimeout(window.t);window.t=setTimeout(sigRender,60)};
+
+function route(){
+  const h=location.hash.slice(1);
+  mode=h==="photo"||h==="signature"?h:null;
+  $("#home").hidden=!!mode;$("#tool").hidden=!mode;
+  if(!mode)return;
+  $("#ttl").textContent=mode==="photo"?"📷 Photo":"✍️ Signature";
+  $("#sigopt").hidden=mode!=="signature";
+  $("#dt").textContent="Tap to choose "+(mode==="photo"?"a photo":"a signature photo or scan");
+  chips($("#ex"),PRE[mode].map(e=>e[0]+" "+e[1]+"–"+e[2]),i=>{const e=PRE[mode][i];MIN=e[1];MAX=e[2];$("#cmin").value=MIN;$("#cmax").value=MAX;[...$("#lims").children].forEach(c=>c.classList.remove("on"))});
+  $("#pv").hidden=true;$("#res").hidden=true;$("#go").disabled=true;$("#msg").textContent="";src=prep=null;$("#f").value="";
+  MAX=50;MIN=0;[...$("#lims").children].forEach((c,i)=>c.classList.toggle("on",i==2));
+}
+addEventListener("hashchange",route);route();
+
+$("#f").onchange=async e=>{
+  const f=e.target.files[0];if(!f)return;
+  try{
+    const bmp=await createImageBitmap(f);
+    const k=Math.min(1,1600/Math.max(bmp.width,bmp.height));
+    src=cv(Math.round(bmp.width*k),Math.round(bmp.height*k));src.getContext("2d").drawImage(bmp,0,0,src.width,src.height);
+    $("#o").src=URL.createObjectURL(f);$("#pv").hidden=false;$("#res").hidden=true;$("#msg").textContent="";
+    if(mode==="signature"){setMsg("Cleaning signature…");await new Promise(r=>setTimeout(r));prep=sigPrep(bmp);sigRender();$("#pc").textContent="Cleaned"}
+    else{const p=$("#p");p.width=src.width;p.height=src.height;p.getContext("2d").drawImage(src,0,0);$("#pc").textContent="Preview"}
+    $("#go").disabled=false;if(mode==="photo")setMsg("")
+  }catch(err){setMsg("Couldn’t read that image. Try a JPG or PNG.",1)}
+};
+function cv(w,h){const c=document.createElement("canvas");c.width=w;c.height=h;return c}
+function setMsg(t,bad){const m=$("#msg");m.textContent=t;m.className=bad?"bad":""}
+
+/* ---------- signature cleaning ---------- */
+function box(a,w,h,r){const t=new Float32Array(a.length),o=new Float32Array(a.length),n=2*r+1,cl=(v,m)=>v<0?0:v>m?m:v;
+ for(let y=0;y<h;y++){let s=0,b=y*w;for(let i=-r;i<=r;i++)s+=a[b+cl(i,w-1)];for(let x=0;x<w;x++){t[b+x]=s/n;s+=a[b+cl(x+r+1,w-1)]-a[b+cl(x-r,w-1)]}}
+ for(let x=0;x<w;x++){let s=0;for(let i=-r;i<=r;i++)s+=t[cl(i,h-1)*w+x];for(let y=0;y<h;y++){o[y*w+x]=s/n;s+=t[cl(y+r+1,h-1)*w+x]-t[cl(y-r,h-1)*w+x]}}
+ return o}
+function lum(c){const d=c.getContext("2d").getImageData(0,0,c.width,c.height).data,g=new Float32Array(c.width*c.height);for(let i=0;i<g.length;i++)g[i]=.299*d[i*4]+.587*d[i*4+1]+.114*d[i*4+2];return g}
+function sigPrep(bmp){
+  const L=1400,k=Math.min(3,L/Math.max(bmp.width,bmp.height)),w=Math.round(bmp.width*k),h=Math.round(bmp.height*k);
+  const c=cv(w,h),x=c.getContext("2d");x.imageSmoothingQuality="high";x.fillStyle="#fff";x.fillRect(0,0,w,h);x.drawImage(bmp,0,0,w,h);
+  const g=lum(c),f=4,sw=Math.max(3,Math.ceil(w/f)),sh=Math.max(3,Math.ceil(h/f)),sc=cv(sw,sh);sc.getContext("2d").drawImage(c,0,0,sw,sh);
+  const s=lum(sc),r=Math.max(3,Math.round(Math.min(sw,sh)*.1));
+  let b=box(s,sw,sh,r);for(let i=0;i<s.length;i++)if(s[i]<b[i]*.88)s[i]=b[i];b=box(s,sw,sh,r);
+  const norm=new Float32Array(w*h);
+  for(let y=0;y<h;y++){const fy=Math.min(sh-1.001,y/f),y0=fy|0,dy=fy-y0;for(let X=0;X<w;X++){const fx=Math.min(sw-1.001,X/f),x0=fx|0,dx=fx-x0,i=y0*sw+x0;
+    const bg=b[i]*(1-dx)*(1-dy)+b[i+1]*dx*(1-dy)+b[i+sw]*(1-dx)*dy+b[i+sw+1]*dx*dy;
+    norm[y*w+X]=Math.min(1,g[y*w+X]/Math.max(bg,20))}}
+  const hist=new Float32Array(256);for(let i=0;i<norm.length;i++)hist[Math.min(255,norm[i]*255|0)]++;
+  let tot=norm.length,sum=0;for(let i=0;i<256;i++)sum+=i*hist[i];let wb=0,sb=0,best=0,T=128;
+  for(let i=0;i<256;i++){wb+=hist[i];if(!wb)continue;const wf=tot-wb;if(!wf)break;sb+=i*hist[i];const mb=sb/wb,mf=(sum-sb)/wf,v=wb*wf*(mb-mf)**2;if(v>best){best=v;T=i}}
+  return{w,h,norm,T:Math.min(.85,Math.max(.4,T/255))}
+}
+function sigRender(){
+  if(!prep)return;
+  const{w,h,norm}=prep,T=prep.T+(+$("#str").value)*.015,soft=.1;
+  let a=new Float32Array(w*h);for(let i=0;i<a.length;i++){const v=(T-norm[i])/soft+.5;a[i]=v<0?0:v>1?1:v}
+  a=box(a,w,h,1);for(let i=0;i<a.length;i++){const v=(a[i]-.3)/.4,c=v<0?0:v>1?1:v;a[i]=c*c*(3-2*c)}   /* smooth then re-sharpen edges */
+  let x0=w,y0=h,x1=0,y1=0;for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(a[y*w+x]>.3){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
+  if(x1<=x0){setMsg("No ink found. Use a darker pen on plain paper, with good light.",1);return}
+  const pad=Math.round(Math.max(x1-x0,y1-y0)*.05)+8;x0=Math.max(0,x0-pad);y0=Math.max(0,y0-pad);x1=Math.min(w-1,x1+pad);y1=Math.min(h-1,y1+pad);
+  const cw=x1-x0+1,ch=y1-y0+1,c=cv(cw,ch),cx=c.getContext("2d"),im=cx.createImageData(cw,ch),d=im.data,[,core,edge]=[0,INKS[ink][1],INKS[ink][2]];
+  for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){const v=a[(y+y0)*w+x+x0],k=(y*cw+x)*4,m=v*v,u=1-v;
+    d[k]=255*u+(edge[0]*(1-m)+core[0]*m)*v;d[k+1]=255*u+(edge[1]*(1-m)+core[1]*m)*v;d[k+2]=255*u+(edge[2]*(1-m)+core[2]*m)*v;d[k+3]=255}
+  cx.putImageData(im,0,0);sigC=c;
+  const p=$("#p");p.width=cw;p.height=ch;p.getContext("2d").drawImage(c,0,0);setMsg("")
+}
+
+/* ---------- compress to exact KB ---------- */
+function sharpen(c,a){const x=c.getContext("2d"),w=c.width,h=c.height,d=x.getImageData(0,0,w,h),p=d.data,o=new Uint8ClampedArray(p);
+ for(let y=1;y<h-1;y++)for(let i=1;i<w-1;i++){const k=(y*w+i)*4;for(let q=0;q<3;q++)o[k+q]=p[k+q]*(1+4*a)-a*(p[k-4+q]+p[k+4+q]+p[k-w*4+q]+p[k+w*4+q])}
+ d.data.set(o);x.putImageData(d,0,0)}
+const toBlob=(c,q)=>new Promise(r=>c.toBlob(r,"image/jpeg",q));
+async function fit(base,maxB,sharp){
+  let s=1;
+  for(let i=0;i<14;i++){
+    const c=cv(Math.max(8,Math.round(base.width*s)),Math.max(8,Math.round(base.height*s))),x=c.getContext("2d");
+    x.imageSmoothingQuality="high";x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(base,0,0,c.width,c.height);
+    if(sharp&&s<1)sharpen(c,.35);
+    const hi=await toBlob(c,.95);if(hi.size<=maxB)return{b:hi,c};
+    let lo=await toBlob(c,sharp?.5:.3);
+    if(lo.size<=maxB){let b=lo,l=sharp?.5:.3,h=.95;for(let j=0;j<7;j++){const m=(l+h)/2,t=await toBlob(c,m);if(t.size<=maxB){b=t;l=m}else h=m}return{b,c}}
+    s*=.88;
+  }
+  return null
+}
+$("#go").onclick=async()=>{
+  if(!(MAX>0))return setMsg("Choose a KB limit first.",1);
+  if(MIN>=MAX)return setMsg("Minimum must be lower than the limit.",1);
+  $("#go").disabled=true;setMsg("Working…");await new Promise(r=>setTimeout(r,30));
+  const base=mode==="signature"?sigC:src,r=await fit(base,MAX*1024-200,mode==="signature");
+  $("#go").disabled=false;
+  if(!r)return setMsg("Couldn’t reach that size. Try a higher limit.",1);
+  let b=r.b;if(MIN&&b.size<MIN*1024)b=new Blob([b,new Uint8Array(MIN*1024-b.size+300)],{type:"image/jpeg"});
+  if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(b);
+  $("#ri").src=url;$("#dl").href=url;$("#dl").download=(mode==="signature"?"signature":"photo")+"-"+Math.round(b.size/1024)+"kb.jpg";
+  $("#dl").textContent="Download · "+(b.size/1024).toFixed(1)+" KB";$("#res").hidden=false;
+  setMsg("Done: "+(b.size/1024).toFixed(1)+" KB, "+r.c.width+"×"+r.c.height+" px.");$("#msg").className="ok";
+  $("#res").scrollIntoView({behavior:"smooth"})
+};
+</script>
+</body>
+</html>
